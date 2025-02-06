@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Sign in to X{% endblock %}
+
+{% block additional_styles %}
+.social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 8px;
+    border-radius: 9999px;
+    border: 1px solid rgb(51, 54, 57);
+    background-color: white;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(15, 20, 25);
+}
+
+.social-button img {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 16px 0;
+    color: rgb(113, 118, 123);
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid rgb(51, 54, 57);
+    border-radius: 4px;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #1d9bf0;
+}
+
+.next-button {
+    width: 100%;
+    padding: 12px;
+    background-color: white;
+    border: none;
+    border-radius: 9999px;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.forgot-password {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid rgb(51, 54, 57);
+    border-radius: 9999px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.signup-text {
+    color: rgb(113, 118, 123);
+    font-size: 15px;
+    text-align: center;
+}
+
+.signup-link {
+    color: rgb(29, 155, 240);
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 31px;
+    font-weight: bold;
+    margin: 20px 0 32px;
+    text-align: center;
+}
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = usernameInput.value;
+        
+        // Redirect to password page with username
+        window.location.href = `/password?username=${encodeURIComponent(username)}`;
+    });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<h1>Sign in to X</h1>
+
+<button class="social-button" onclick="window.location.href='/auth/google'">
+    <img src="/static/google-logo.png" alt="Google logo">
+    Sign in with Google
+</button>
+
+<button class="social-button" onclick="window.location.href='/auth/apple'">
+    <img src="/static/apple-logo.png" alt="Apple logo">
+    Sign in with Apple
+</button>
+
+<div class="divider">or</div>
+
+<form id="loginForm">
+    <input type="text" id="username" class="input-field" placeholder="Phone, email, or username" required>
+    <button type="submit" class="next-button">Next</button>
+</form>
+
+<button class="forgot-password" onclick="window.location.href='/forgot-password'">Forgot password?</button>
+
+<p class="signup-text">
+    Don't have an account? <a href="#" class="signup-link">Sign up</a>
+</p>
+{% endblock %}
